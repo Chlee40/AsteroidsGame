@@ -1,5 +1,6 @@
 Spaceship bob = new Spaceship();
-Star[] starry = new Star[400];
+ArrayList <Asteroid> rocky = new ArrayList <Asteroid>(); 
+Star[] starry = new Star[500];
 public void setup() 
 {
   size(600,600);
@@ -7,26 +8,39 @@ public void setup()
   {
   	starry[i] = new Star();
   }
+    for (int i = 0; i < 15; i++)
+  {
+  	rocky.add(new Asteroid());
+  }
 }
 public void draw() 
 {
 	background(0);
-	bob.show();
-	bob.move();
 	for (int i = 0; i < starry.length; i++)
   {
   	starry[i].show();
+  }
+	bob.show();
+	bob.move();
+	for (int i = 0; i < rocky.size(); i++)
+  {
+  	rocky.get(i).show();
+    rocky.get(i).move();
+    if (dist((float) bob.getPosX(),(float) bob.getPosY(),(float) rocky.get(i).getPosX(),(float) rocky.get(i).getPosY()) < 20) 
+    {
+    	rocky.remove(i);
+    }
   }
 }
 public void keyPressed()
 {
 	if (key == 'a')
 	{
-		bob.turn(-5);
+		bob.turn(-10);
 	}
 	if (key == 'd')
 	{
-		bob.turn(5);
+		bob.turn(10);
 	}
 	if (key == 'w')
 	{
